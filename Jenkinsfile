@@ -24,15 +24,18 @@ node {
         }
 
         stage('Package') {
-            echo 'Creating JAR file...'
+            stage('Package') {
 
-            sh 'mvn package -DskipTests'
+    echo 'Creating JAR file...'
 
-            archiveArtifacts(
-                artifacts: 'target/*.jar',
-                fingerprint: true
-            )
-        }
+    sh 'mvn clean package -DskipTests'
+
+    archiveArtifacts(
+        artifacts: 'target/*.jar',
+        fingerprint: true
+    )
+}
+
 
         stage('Deploy') {
 
